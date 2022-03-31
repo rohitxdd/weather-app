@@ -1,0 +1,70 @@
+body{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-image: url("https://images.unsplash.com/photo-1583214312364-9318b58180dc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-transition: background-image 1s ease-in-out;
+    transition: background-image 1s ease-in-out;
+}
+
+.card {
+    background-color: #00000096;
+    padding: 2rem;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 420px;
+    margin: 1rem;
+    color: white;
+}
+
+.search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+}
+
+.search-bar{
+    height: 100%;
+    border: none;
+    outline: none !important;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+    background-color: transparent;
+    border-bottom: 2.5px solid black;
+    margin-left:1rem ;
+    color: rgba(255, 255, 255, 0.76);
+    width: calc(100% - 80px);
+}
+
+
+
+button{
+    outline: none;
+    border: none;
+    border-radius: 1rem;
+    height: 2rem;
+    width: 2rem;
+    margin: 1rem;
+    background-color: rgba(0, 0, 0, 0.452);
+    color: white;
+    font-weight: bold;
+    transition: 0.5s ease-in-out;
+}
+
+button:hover{
+    background-color: rgba(77, 74, 74, 0.664);
+}
+
+.hidden{
+    display: none;
+}
