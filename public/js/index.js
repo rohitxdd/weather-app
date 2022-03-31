@@ -34,11 +34,11 @@ function showPosition(position){
 }
 getLocation();
 
-
+//https://rohitxdd.herokuapp.com/
 //using ajax to communicate with server
 function postToSever(locord){
     const xhr = new XMLHttpRequest();
-    xhr.open("POST","http://localhost:3000/home/", true);
+    xhr.open("POST","https://rohitxdd.herokuapp.com/home/", true);
 
     var locordData = JSON.stringify(locord);
     console.log(locordData)
@@ -49,7 +49,7 @@ function postToSever(locord){
 
 function getWeatherinfo(){
     const xhr = new XMLHttpRequest();
-    xhr.open("GET","http://localhost:3000/home/", true)
+    xhr.open("GET","https://rohitxdd.herokuapp.com/home/", true)
     xhr.onload = function(){
         Info = JSON.parse(this.response);
         updateHTML(Info);
@@ -111,7 +111,7 @@ document.querySelector(".searchBtn").addEventListener("click", function(){
     document.querySelector(".search-bar").value = "";
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:3000/query/", true);
+    xhr.open("POST", "https://rohitxdd.herokuapp.com/query/", true);
     xhr.onload = function(){
         Info = JSON.parse(this.response)
         updateHTML(Info);
@@ -125,7 +125,7 @@ document.querySelector(".search-bar").addEventListener("keyup", function(event){
         var query = (document.querySelector(".search-bar").value);
         document.querySelector(".search-bar").value = "";
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:3000/query/", true);
+        xhr.open("POST", "https://rohitxdd.herokuapp.com/query/", true);
         xhr.onload = function(){
             Info = JSON.parse(this.response)
             updateHTML(Info);
