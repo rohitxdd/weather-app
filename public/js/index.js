@@ -36,6 +36,7 @@ getLocation();
 
 //https://rohitxdd.herokuapp.com/
 //using ajax to communicate with server
+
 function postToSever(locord){
     const xhr = new XMLHttpRequest();
     xhr.open("POST","https://rohitxdd.herokuapp.com/home/", true);
