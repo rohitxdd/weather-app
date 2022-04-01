@@ -1,5 +1,6 @@
 body{
     display: flex;
+    flex-direction: column;
     align-content: center;
     justify-content: center;
     align-items: center;
@@ -67,4 +68,25 @@ button:hover{
 
 .hidden{
     display: none;
+}
+
+.credits{
+    position: absolute;
+    bottom: 10px;
+    display: block;
+}
+
+h3{
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+}
+
+.visibility{
+    display:none;
+}
+
+
+a{
+    color:white
 }

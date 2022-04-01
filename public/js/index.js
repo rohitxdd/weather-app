@@ -1,5 +1,4 @@
 // To get geo coords of current device location.
-console.log("test")
 var lat;
 var lon;
 var locord;
@@ -42,7 +41,7 @@ function postToSever(locord){
     xhr.open("POST","https://rohitxdd.herokuapp.com/home/", true);
 
     var locordData = JSON.stringify(locord);
-    console.log(locordData)
+    // console.log(locordData)
     xhr.send(locordData);
     getWeatherinfo();
 }
@@ -70,16 +69,21 @@ function getrandompic(){
   
     xhr.onload = function(){
         var imgurl = JSON.parse(this.response)
+        // console.log(imgurl)
+        var userName = imgurl.user.name;
+        var userlink = imgurl.user.links.html;
         imgurl = imgurl.urls.full;
-        changeBackground(imgurl);
+        changeBackground(imgurl, userName, userlink);
     }
     xhr.send(JSON.stringify());
 }
 getrandompic();
 
 
-function changeBackground(imgurl){
+function changeBackground(imgurl, userName, userlink){
     document.body.style.backgroundImage = "url("+imgurl+")";
+    document.querySelector(".credits").innerHTML = `<h3>©Photo by <a href="${userlink}"><span>${userName}</span></a> on <a href="https://unsplash.com/"><span>unsplash</span></a></h3>`;
+    document.querySelector(".credits").classList.remove("visibility");
 }
 
 
