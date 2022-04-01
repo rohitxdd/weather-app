@@ -72,17 +72,18 @@ function getrandompic(){
         // console.log(imgurl)
         var userName = imgurl.user.name;
         var userlink = imgurl.user.links.html;
-        imgurl = imgurl.urls.full;
-        changeBackground(imgurl, userName, userlink);
+        var pageLink = imgurl.links.html;
+        imgurl = imgurl.urls.regular;
+        changeBackground(imgurl, userName, userlink, pageLink);
     }
     xhr.send(JSON.stringify());
 }
 getrandompic();
 
 
-function changeBackground(imgurl, userName, userlink){
+function changeBackground(imgurl, userName, userlink, pageLink){
     document.body.style.backgroundImage = "url("+imgurl+")";
-    document.querySelector(".credits").innerHTML = `<h3>©Photo by <a href="${userlink}"><span>${userName}</span></a> on <a href="https://unsplash.com/"><span>unsplash</span></a></h3>`;
+    document.querySelector(".credits").innerHTML = `<h3>©Photo by <a href="${userlink}"><span>${userName}</span></a> on <a href="${pageLink}"><span>unsplash</span></a></h3>`;
     document.querySelector(".credits").classList.remove("visibility");
 }
 
@@ -138,6 +139,5 @@ document.querySelector(".search-bar").addEventListener("keyup", function(event){
         xhr.send(JSON.stringify(query));
     }
 })
-
 
 
