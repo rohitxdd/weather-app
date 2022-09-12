@@ -8,10 +8,8 @@ var Info;
 var orient;
 if(window.innerWidth > 720){
     orient = "landscape";
-    // console.log(orient)
 }else{
     orient = "portrait";
-    // console.log(orient)
 }
 
 
@@ -31,15 +29,13 @@ function showPosition(position){
     };
     postToSever(locord);
 }
+
 getLocation();
 
-//https://rohitxdd.herokuapp.com/
-//using ajax to communicate with server
 
 function postToSever(locord){
     const xhr = new XMLHttpRequest();
-    xhr.open("POST","https://rohitxdd.herokuapp.com/home/", true);
-
+    xhr.open("POST","/home", true);
     var locordData = JSON.stringify(locord);
     // console.log(locordData)
     xhr.send(locordData);
@@ -49,7 +45,7 @@ function postToSever(locord){
 
 function getWeatherinfo(){
     const xhr = new XMLHttpRequest();
-    xhr.open("GET","https://rohitxdd.herokuapp.com/home/", true)
+    xhr.open("GET","/home", true)
     xhr.onload = function(){
         Info = JSON.parse(this.response);
         updateHTML(Info);
@@ -61,22 +57,17 @@ function getWeatherinfo(){
 
 function getrandompic(){
     const xhr = new XMLHttpRequest();
-    const keyID = "Hjvwk9mpXLgSx6zdkewmydv7MvQnqMI81xFku8R9Efw";
-    const query = "wallpaper";
-    const url = "https://api.unsplash.com/photos/random/?client_id="+keyID+"&query="+query+"&orientation="+orient;
-
-    xhr.open("GET", url, true)
-  
+    const url = "/backPic"
+    xhr.open("POST", url, true)
     xhr.onload = function(){
         var imgurl = JSON.parse(this.response)
-        // console.log(imgurl)
         var userName = imgurl.user.name;
         var userlink = imgurl.user.links.html;
         var pageLink = imgurl.links.html;
         imgurl = imgurl.urls.regular;
         changeBackground(imgurl, userName, userlink, pageLink);
     }
-    xhr.send(JSON.stringify());
+    xhr.send(JSON.stringify(orient));
 }
 getrandompic();
 
@@ -96,19 +87,16 @@ setInterval(()=>{
 function updateHTML(Info){
     document.querySelector(".city").innerHTML = "Weather in "+ Info.name;
     document.querySelector(".temphead").innerHTML = Math.floor(Info.main.temp) + "°C";
+    document.querySelector(".icon").src = `https://openweathermap.org/img/wn/${Info.weather[0].icon}@2x.png`;
     var description = Info.weather[0].description;
     document.querySelector(".description").innerHTML = description.toUpperCase();
     document.querySelector(".humidity").innerHTML = Info.main.humidity+"%";
     document.querySelector(".wind").innerHTML = Info.wind.speed+" Meter per second.";
     document.querySelector(".card").classList.remove("hidden");
-
-
 }
 
 function denied(){
-
     document.querySelector(".card").classList.remove("hidden");
-
 }
 
 //Search function query
@@ -117,7 +105,7 @@ document.querySelector(".searchBtn").addEventListener("click", function(){
     document.querySelector(".search-bar").value = "";
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://rohitxdd.herokuapp.com/query/", true);
+    xhr.open("POST", "/query", true);
     xhr.onload = function(){
         Info = JSON.parse(this.response)
         updateHTML(Info);
@@ -131,9 +119,13 @@ document.querySelector(".search-bar").addEventListener("keyup", function(event){
         var query = (document.querySelector(".search-bar").value);
         document.querySelector(".search-bar").value = "";
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://rohitxdd.herokuapp.com/query/", true);
+        xhr.open("POST", "/query", true);
         xhr.onload = function(){
             Info = JSON.parse(this.response)
+            if(Info.cod === "404"){
+                alert(Info.message)
+                return
+            }
             updateHTML(Info);
         }
         xhr.send(JSON.stringify(query));

@@ -89,3 +89,11 @@ h3{
 a{
     color:white
 }
+
+.temp, .temp h1{
+    display: inline;
+}
+
+.icon{
+    float:right
+}
